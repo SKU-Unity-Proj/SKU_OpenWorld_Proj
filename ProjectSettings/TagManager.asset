@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerEyes
   - FrontViewTrigger
+  - Item
   layers:
   - Default
   - TransparentFX
