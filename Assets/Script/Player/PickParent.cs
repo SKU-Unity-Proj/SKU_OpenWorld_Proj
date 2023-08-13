@@ -50,19 +50,28 @@ public class PickParent : MonoBehaviour
                 }
                 else if (col.gameObject.tag == "Item" && takeItem == true)
                 {
-                    playerEquipPoint.transform.DetachChildren();
-
-                    Collider itemCol = col.GetComponent<BoxCollider>();
-                    itemCol.isTrigger = false;
-                    Rigidbody itemRigid = col.GetComponent<Rigidbody>();
-                    itemRigid.isKinematic = false;
-
                     anim.SetTrigger("DropItem");
+
+                    Invoke("Throw", 1.1f);
 
                     takeItem = false;
                     return;
                 }
             }
         }
+    }
+
+    void Throw()
+    {
+        Collider itemCol = playerEquipPoint.GetComponentInChildren<BoxCollider>();
+        Rigidbody itemRigid = playerEquipPoint.GetComponentInChildren<Rigidbody>();
+        
+        playerEquipPoint.transform.DetachChildren();
+
+        itemCol.isTrigger = false;
+        itemRigid.isKinematic = false;
+
+        itemRigid.AddForce(transform.forward * 180);
+        itemRigid.AddForce(transform.up * 150);
     }
 }
