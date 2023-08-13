@@ -14,7 +14,7 @@ public class SoundData : BaseData
 {
     public SoundClip[] soundClips = new SoundClip[0];
 
-    private string clipPath = "Sound/";
+    //private string clipPath = "Sound/";
     private string xmlFilePath = "";
     private string xmlFileName = "soundData.xml";
     private string dataPath = "Data/soundData"; //리소스 로드용 데이터 Path

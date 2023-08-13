@@ -8,6 +8,7 @@ public class PickupItem : MonoBehaviour
     public GameObject Cube;
     public float radius = 1;
     public GameObject Key;
+    public Transform instantiatePos;
     private bool takeItem = false;
 
     void Start()
@@ -42,7 +43,7 @@ public class PickupItem : MonoBehaviour
                 {
                     anim.SetTrigger("DropItem");
                     Key.gameObject.SetActive(false);
-                    Instantiate(Cube, transform.position, transform.rotation);
+                    Instantiate(Cube, instantiatePos.transform.position, instantiatePos.transform.rotation);
                     takeItem = false;
                     return;
                 }
