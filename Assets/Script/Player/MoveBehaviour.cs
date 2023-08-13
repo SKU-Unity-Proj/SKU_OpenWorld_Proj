@@ -32,7 +32,6 @@ public class MoveBehaviour : GenericBehaviour
         groundedBool = Animator.StringToHash(FC.AnimatorKey.Grounded);
         behaviourController.GetAnimator.SetBool(groundedBool, true);
 
-        //
         behaviourController.SubScribeBehavior(this);
         behaviourController.RegisterDefaultBehaviour(this.behaviorCode);
         speedSeeker = runSpeed;

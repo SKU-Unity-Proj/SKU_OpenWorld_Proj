@@ -5,22 +5,21 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
     public Animator anim;
-    public GameObject Cube;
     public float radius = 1;
-    public GameObject Key;
-    public Transform instantiatePos;
     private bool takeItem = false;
+
+    public GameObject playerEquipPoint; //자식으로 보내질 위치
 
     void Start()
     {
         anim = this.GetComponent<Animator>();
     }
 
-
     void Update()
     {
         Pickup();
     }
+
 
     void Pickup()
     {
@@ -34,20 +33,45 @@ public class PickupItem : MonoBehaviour
                 if (col.gameObject.tag == "Item" && takeItem == false)
                 {
                     anim.SetTrigger("PickupItem");
-                    Destroy(col.gameObject);
-                    Key.gameObject.SetActive(true);
+
+                    //자식으로 보내기 전 물리엔진 끄기
+                    Collider itemCol = col.GetComponent<BoxCollider>();
+                    itemCol.isTrigger = true;
+                    Rigidbody itemRigid = col.GetComponent<Rigidbody>();
+                    itemRigid.isKinematic = true;
+
+                    //아이템을 자식으로 보내고 위치와 회전값 초기화
+                    col.transform.SetParent(playerEquipPoint.transform);
+                    col.transform.localPosition = Vector3.zero;
+                    col.transform.rotation = new Quaternion(0, 0, 0, 0);
+
                     takeItem = true;
                     return;
                 }
-                else if (takeItem == true)
+                else if (col.gameObject.tag == "Item" && takeItem == true)
                 {
                     anim.SetTrigger("DropItem");
-                    Key.gameObject.SetActive(false);
-                    Instantiate(Cube, instantiatePos.transform.position, instantiatePos.transform.rotation);
+
+                    Invoke("Throw", 1.1f);
+
                     takeItem = false;
                     return;
                 }
             }
         }
+    }
+
+    void Throw()
+    {
+        Collider itemCol = playerEquipPoint.GetComponentInChildren<BoxCollider>();
+        Rigidbody itemRigid = playerEquipPoint.GetComponentInChildren<Rigidbody>();
+
+        playerEquipPoint.transform.DetachChildren();
+
+        itemCol.isTrigger = false;
+        itemRigid.isKinematic = false;
+
+        itemRigid.AddForce(transform.forward * 180);
+        itemRigid.AddForce(transform.up * 150);
     }
 }
