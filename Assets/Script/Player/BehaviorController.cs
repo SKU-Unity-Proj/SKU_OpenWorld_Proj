@@ -312,5 +312,10 @@ public abstract class GenericBehaviour : MonoBehaviour
 
     }
 
+
+
+    //개인 추가 스크립트
+
+
 }
 
