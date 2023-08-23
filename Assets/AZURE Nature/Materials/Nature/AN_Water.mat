@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WavesNormal:
-        m_Texture: {fileID: 2800000, guid: 3b9853615afb612418328f6bbec661b4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 58a059b07b093a745b47c2191525ddce, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -110,8 +110,8 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color0: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0}
-    - _Color1: {r: 0.26223743, g: 0.58168924, b: 0.6698113, a: 0}
-    - _Color2: {r: 1, g: 1, b: 1, a: 0}
+    - _Color1: {r: 0, g: 0.5085495, b: 0.6509434, a: 0}
+    - _Color2: {r: 0, g: 0.37088633, b: 1, a: 0}
     - _DepthColor: {r: 0, g: 1, b: 0.9725489, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _NormalScale: {r: 2, g: 2, b: 0, a: 0}
