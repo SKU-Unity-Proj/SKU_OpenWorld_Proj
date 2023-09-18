@@ -10,6 +10,11 @@ public class PickupItem : MonoBehaviour
 
     public GameObject playerEquipPoint; //자식으로 보내질 위치
 
+    void Awake()
+    {
+        Cursor.visible = false;
+    }
+
     void Start()
     {
         anim = this.GetComponent<Animator>();

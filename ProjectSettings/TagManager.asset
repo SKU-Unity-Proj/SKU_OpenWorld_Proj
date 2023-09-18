@@ -8,6 +8,7 @@ TagManager:
   - FrontViewTrigger
   - Item
   - PullObject
+  - Kitchen
   layers:
   - Default
   - TransparentFX
