@@ -405,11 +405,6 @@ public class GiantFSM : MonoBehaviour
     {
         if (isMove == true && state == State.ATTACK )
         {
-            /*
-            var dir = KitchenPos.transform.position - transform.position;
-            transform.position += dir.normalized * Time.deltaTime * 4f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 4f);
-            */
             agent.SetDestination(KitchenPos.transform.position);
         }
         else
