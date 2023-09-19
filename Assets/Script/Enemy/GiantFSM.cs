@@ -6,9 +6,6 @@ using UnityEngine.AI;
 //IDLE 상태 일 때 해당 위치에 가서 할 일 하게 만들기
 //TRACE 상태일 때 몇 초간 플레이어가 시야에 없으면 IDLE 상태로 전환
 //시야각의 높이 구별로 공격 모션 다르게 하기 (플레이어가 위에 있는지 아래있는지에 따라)
-//걸어다닐때 걸어다니는 애니메이션 안됨
-//checkRoom 못가져옴
-//할 일 항상 하는게 아니라 몇 초동안 순찰 상태 만들기
 
 
 public class GiantFSM : MonoBehaviour
@@ -16,6 +13,7 @@ public class GiantFSM : MonoBehaviour
     [SerializeField] private float viewAngle;
     [SerializeField] private float viewDistance;
     [SerializeField] private GameObject KitchenPos;
+    [SerializeField] private GameObject LivingPos;
 
     private Transform playerTr;
     private UnityEngine.AI.NavMeshAgent agent;
@@ -24,13 +22,11 @@ public class GiantFSM : MonoBehaviour
     private Animator anim;
     private int findSeconds;
     private bool isMove;
-    private bool isPos;
 
     void Awake()
     {
         StartCoroutine(View());
-        //nevMeshAgent 회전 제어
-        //agent.updateRotation = false;
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
     void Start()
@@ -39,12 +35,10 @@ public class GiantFSM : MonoBehaviour
         StartCoroutine(CheckMonsterState());
         anim = this.GetComponent<Animator>();
         playerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         catchBox = this.transform.GetChild(0).gameObject;
         checkRoom = this.transform.GetChild(1).gameObject;
 
         isMove = false;
-        isPos = false;
     }
 
     void Update()
@@ -95,7 +89,6 @@ public class GiantFSM : MonoBehaviour
                         }
                         else if (this.state == State.TRACE && _targetTf==null)
                         {
-                            CantFindPlayer();
                             Debug.Log("cantfind");
                         }
                     }
@@ -108,20 +101,11 @@ public class GiantFSM : MonoBehaviour
     }
     #endregion
 
-    void  CantFindPlayer()
-    {
-        findSeconds++;
-        if(findSeconds > 20)
-        {
-            ChangeState(State.IDLE);
-        }
-    }
-
     #region 거인 FSM
 
     public enum State
     {
-        WALK,
+        WANDER,
         IDLE,
         TRACE,
         ATTACK
@@ -135,8 +119,8 @@ public class GiantFSM : MonoBehaviour
 
         switch (state)
         {
-            case State.WALK:
-                Walk();
+            case State.WANDER:
+                WANDER();
                 break;
             case State.IDLE:
                 IDLE();
@@ -153,9 +137,9 @@ public class GiantFSM : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (state == State.WALK)
+        if (state == State.WANDER)
         {
-            WalkTriggerStay(other);
+            WANDERTriggerStay(other);
         }
     }
 
@@ -163,8 +147,8 @@ public class GiantFSM : MonoBehaviour
     {
         switch (state)
         {
-            case State.WALK:
-                WalkTrigger(other);
+            case State.WANDER:
+                WANDERTrigger(other);
                 break;
             case State.IDLE:
                 IDLETrigger(other);
@@ -182,8 +166,8 @@ public class GiantFSM : MonoBehaviour
     {
         switch (this.state)
         {
-            case State.WALK:
-                WalkExit();
+            case State.WANDER:
+                WANDERExit();
                 break;
             case State.IDLE:
                 IDLEExit();
@@ -200,8 +184,8 @@ public class GiantFSM : MonoBehaviour
 
         switch (state)
         {
-            case State.WALK:
-                WalkEnter();
+            case State.WANDER:
+                WANDEREnter();
                 break;
             case State.IDLE:
                 IDLEEnter();
@@ -217,33 +201,9 @@ public class GiantFSM : MonoBehaviour
 
 
 
-    private void WalkEnter()
-    {
-
-    }
-    private void Walk()
-    {
-
-    }
-    private void WalkTrigger(Collider other)
-    {
-
-    }
-    private void WalkTriggerStay(Collider other)
-    {
-
-    }
-    private void WalkExit()
-    {
-
-    }
-
-
-
-
     private void IDLEEnter()
     {
-        findSeconds = 0;
+        agent.ResetPath();
         transform.GetChild(1).gameObject.SetActive(true);
         StartCoroutine("IdleToWander");
     }
@@ -251,16 +211,48 @@ public class GiantFSM : MonoBehaviour
     {
 
     }
-    private void IDLETrigger(Collider IDLEcol)
+    private void IDLETrigger(Collider other)
     {
-        if (IDLEcol.GetComponent<Collider>().CompareTag("Kitchen"))
+        if (other.GetComponent<Collider>().CompareTag("Kitchen"))
         {
             isMove = true;
+            agent.SetDestination(KitchenPos.transform.position);
+        }
+        if (other.GetComponent<Collider>().CompareTag("Livingroom"))
+        {
+            isMove = true;
+            agent.SetDestination(LivingPos.transform.position);
         }
     }
     private void IDLEExit()
     {
         transform.GetChild(1).gameObject.SetActive(false);
+        agent.ResetPath();
+    }
+
+
+
+
+    private void WANDEREnter()
+    {
+        StartCoroutine("Patrol");
+        StartCoroutine("WanderToIdle");
+    }
+    private void WANDER()
+    {
+
+    }
+    private void WANDERTrigger(Collider other)
+    {
+
+    }
+    private void WANDERTriggerStay(Collider other)
+    {
+
+    }
+    private void WANDERExit()
+    {
+        StopCoroutine("Patrol");
     }
 
 
@@ -268,7 +260,7 @@ public class GiantFSM : MonoBehaviour
 
     private void TRACEEnter()
     {
-        Debug.Log("Trace Start");
+        agent.ResetPath();
         catchBox.SetActive(true);
     }
     private void TRACE()
@@ -309,18 +301,36 @@ public class GiantFSM : MonoBehaviour
     }
     #endregion
 
-    #region 거인 배회
+    IEnumerator WanderToIdle()
+    {
+        yield return new WaitForSeconds(10f);
+        ChangeState(State.IDLE);
+
+        if (state == State.TRACE)
+        {
+            StopCoroutine("WanderToIdle");
+        }
+    }
     IEnumerator IdleToWander()
     {
-        int changeTime = Random.Range(1, 5);
+        yield return new WaitForSeconds(10f);
+        ChangeState(State.WANDER);
+
+        if (state == State.TRACE)
+        {
+            StopCoroutine("IdleToWander");
+        }
+    }
+
+    #region 거인 배회
+    IEnumerator Patrol()
+    {
+        int changeTime = Random.Range(2, 5);
 
         yield return new WaitForSeconds(changeTime);
 
         float currentTime = 0;
         float maxTime = 10;
-
-        //이동 속도 설정
-        //agent.speed = status.WalkSpeed;
 
         //목표 위치 설정
         agent.SetDestination(CalculateWanderPosition());
@@ -329,6 +339,7 @@ public class GiantFSM : MonoBehaviour
         Vector3 to = new Vector3(agent.destination.x, 0, agent.destination.z);
         Vector3 from = new Vector3(transform.position.x, 0, transform.position.z);
         transform.rotation = Quaternion.LookRotation(to - from);
+        anim.SetBool("Walk", true);
 
         while (true)
         {
@@ -337,9 +348,11 @@ public class GiantFSM : MonoBehaviour
             //목표 위치에 근접하거나 오랜시간 배회하기 상태에 머물러 있으면
             to = new Vector3(agent.destination.x, 0, agent.destination.z);
             from = new Vector3(transform.position.x, 0, transform.position.z);
-            if ((to - from).sqrMagnitude < 0.1f || currentTime >= maxTime && state == State.IDLE)
+            if ((to - from).sqrMagnitude < 0.1f && state == State.WANDER || currentTime >= maxTime)
             {
-                StartCoroutine("IdleToWander");
+                anim.SetBool("Walk", false);
+                StartCoroutine("Patrol");
+                break;
             }
             yield return null;
         }
@@ -347,7 +360,7 @@ public class GiantFSM : MonoBehaviour
 
     private Vector3 CalculateWanderPosition()
     {
-        float wanderRadius = 30; //현재 위치를 원점으로 하는 반지름
+        float wanderRadius = 20; //현재 위치를 원점으로 하는 반지름
         int wanderJitter = 0; //선택된 각도
         int wanderJitterMin = 0;
         int wanderJitterMax = 360;
@@ -385,26 +398,30 @@ public class GiantFSM : MonoBehaviour
     }
     */
     #endregion
+
+    #region 할 일 이동
     //방 위치에 따라 청소, TV보러 가기 등 할 일 위치로 이동하는 스크립트
     private void RoomMove()
     {
-        if (isMove == true && isPos == false && state == State.IDLE )
+        if (isMove == true && state == State.ATTACK )
         {
+            /*
             var dir = KitchenPos.transform.position - transform.position;
             transform.position += dir.normalized * Time.deltaTime * 4f;
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 4f);
-            //걷기 애니메이션 키기
-        }
-        
-        if (Vector3.Distance(transform.position, KitchenPos.transform.position) <= 0.3f)
-        {
-            isMove = false;
-            isPos = true;
-            //걷기 애니메이션 끄기
+            */
+            agent.SetDestination(KitchenPos.transform.position);
         }
         else
         {
-            isPos = false;
+            isMove = false;
+        }
+
+        if ((KitchenPos.transform.position - this.transform.position).sqrMagnitude < 0.1f && isMove == true)
+        {
+            isMove = false;
+            anim.SetBool("Walk", false);
         }
     }
+    #endregion
 }

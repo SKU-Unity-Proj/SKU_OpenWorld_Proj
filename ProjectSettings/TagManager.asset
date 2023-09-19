@@ -9,6 +9,7 @@ TagManager:
   - Item
   - PullObject
   - Kitchen
+  - Livingroom
   layers:
   - Default
   - TransparentFX
