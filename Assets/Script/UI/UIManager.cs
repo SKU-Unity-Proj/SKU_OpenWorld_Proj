@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class UIManager : MonoBehaviour
     public GameObject scanObject;
     public bool isAction;
     public int talkIndex;
+    public CinemachineVirtualCamera vCam;
+    public CinemachineVirtualCamera vCam2;
 
     private Ray ray;
     private RaycastHit hit;
@@ -41,6 +44,8 @@ public class UIManager : MonoBehaviour
             isAction = true;
             ObjData objData = scanObject.GetComponent<ObjData>();
             Talk(objData.id, objData.isNpc);
+
+            vCam2.MoveToTopOfPrioritySubqueue();
         }
         talkPanel.SetActive(isAction);
     }

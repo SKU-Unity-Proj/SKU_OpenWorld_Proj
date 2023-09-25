@@ -12,7 +12,7 @@ public class PickupItem : MonoBehaviour
 
     void Awake()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     void Start()

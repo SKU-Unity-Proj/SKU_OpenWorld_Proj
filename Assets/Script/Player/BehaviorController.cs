@@ -20,7 +20,7 @@ public class BehaviorController : MonoBehaviour
     public Transform playerCamera;
     private Animator myAnimator;
     private Rigidbody myRigidbody;
-    private ThirdPersonOrbitCam camSprint;
+    //private ThirdPersonOrbitCam camSprint;
     private Transform myTransform;
 
     // 기본 속성 값들.
@@ -38,7 +38,7 @@ public class BehaviorController : MonoBehaviour
 
     public float GetH { get => h; }
     public float GetV { get => v; }
-    public ThirdPersonOrbitCam GetCamScript { get => camSprint; }
+    //public ThirdPersonOrbitCam GetCamScript { get => camSprint; }
     public Rigidbody GetRigidbody { get => myRigidbody; }
     public Animator GetAnimator { get => myAnimator; }
     public int GetDefaultBehaviour { get => defalutBehaviour; }
@@ -50,7 +50,7 @@ public class BehaviorController : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         hFloat = Animator.StringToHash(FC.AnimatorKey.Horizontal);
         vFloat = Animator.StringToHash(FC.AnimatorKey.Vertical);
-        camSprint = playerCamera.GetComponent<ThirdPersonOrbitCam>();
+        //camSprint = playerCamera.GetComponent<ThirdPersonOrbitCam>();
         myRigidbody = GetComponent<Rigidbody>();
         myTransform = transform;
         // isGround
@@ -107,11 +107,11 @@ public class BehaviorController : MonoBehaviour
         if ((IsSprinting()))
         {
             changedFOV = true;
-            camSprint.SetFOV(sprintFOV);
+            //camSprint.SetFOV(sprintFOV);
         }
         else if (changedFOV)
         {
-            camSprint.ResetFOV();
+            //camSprint.ResetFOV();
             changedFOV = false;
         }
 
