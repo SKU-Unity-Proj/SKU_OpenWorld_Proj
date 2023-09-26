@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CAM2
+  m_Name: Portal
   m_Shader: {fileID: 4800000, guid: 183125437b6c743da9938978c38fae53, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 8400000, guid: 86f96f4f6f9f949b0a56a1bbdc719e1f, type: 2}
+        m_Texture: {fileID: 8400000, guid: fce5e2ed70f57754fb008c39fee3e9c0, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
