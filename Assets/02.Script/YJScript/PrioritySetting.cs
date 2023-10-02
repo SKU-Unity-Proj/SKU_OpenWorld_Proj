@@ -7,7 +7,7 @@ public class PrioritySetting : MonoBehaviour
 {
     //public Camera firstPersonCamera;
     public CinemachineVirtualCamera vCam;
-    public CinemachineVirtualCamera vCam2;
+    public CinemachineMixingCamera vCam2;
 
     void Update()
     {
@@ -21,5 +21,14 @@ public class PrioritySetting : MonoBehaviour
             //firstPersonCamera.enabled = true;
             vCam2.MoveToTopOfPrioritySubqueue();
         }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        vCam2.MoveToTopOfPrioritySubqueue();
+    }
+    void OnTriggerExit(Collider col)
+    {
+        vCam.MoveToTopOfPrioritySubqueue();
     }
 }

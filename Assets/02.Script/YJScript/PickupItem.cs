@@ -28,7 +28,7 @@ public class PickupItem : MonoBehaviour
 
     void Pickup()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             Collider[] colliders =
                     Physics.OverlapSphere(this.transform.position, radius);
