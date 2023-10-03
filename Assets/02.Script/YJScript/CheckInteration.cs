@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CheckUI : MonoBehaviour
+public class CheckInteration : MonoBehaviour
 {
     [SerializeField]
     private float range;  // 아이템 습득이 가능한 최대 거리
@@ -22,7 +22,7 @@ public class CheckUI : MonoBehaviour
 
     void Update()
     {
-        CheckInteration();
+        CheckUI();
         TryAction();
     }
 
@@ -30,16 +30,16 @@ public class CheckUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            CheckInteration();
+            CheckUI();
             CanInteration();
         }
     }
 
-    private void CheckInteration()
+    private void CheckUI()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
-             UIAppear();
+            UIAppear();
         }
         else
             UIDisappear();
