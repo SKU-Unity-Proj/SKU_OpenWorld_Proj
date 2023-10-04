@@ -145,14 +145,24 @@ public class ThirdPersonOrbitCam : MonoBehaviour
         }
         */
 
-        // Reposition Camera
-        Vector3 targetPosition = player.position + smoothPivotOffset + smoothCamOffset;
+        float xOffset = -5.0f;  // -x 방향으로의 오프셋
+        float yOffset = 3.0f;   // +y 방향으로의 오프셋
+
+        Vector3 customOffset = new Vector3(xOffset, yOffset, 0); // 원하는 오프셋 값 설정
+
+        // 회전 쿼터니언을 정의
+        Quaternion rotate90Degrees = Quaternion.Euler(0, -90, 0);
+
+        // 현재 오프셋을 회전하여 새로운 오프셋을 계산
+        Vector3 rotatedCamOffset = rotate90Degrees * smoothCamOffset;
+
+        Vector3 targetPosition = player.position + smoothPivotOffset + rotatedCamOffset + customOffset;
         Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, followSpeed);
 
         cameraTransform.position = smoothedPosition;
 
         // 플레이어의 회전을 가져와서 카메라에 적용
-        Quaternion targetRotation = Quaternion.Euler(0, 180, 0); // 카메라 회전 축 설정
+        Quaternion targetRotation = Quaternion.Euler(0, 90, 0); // 카메라 회전 축 설정
         cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, targetRotation, Time.deltaTime);
 
     }
