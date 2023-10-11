@@ -18,33 +18,23 @@ public class TalkManager : MonoBehaviour
 
     void GenerateData()
     {
-        //NPC1 = 1000, Cube = 100
-        //Chair = 200
-        talkData.Add(1000, new string[] { "안녕?:0", "이 곳에 처음 왔구나?:1" });
-
-        talkData.Add(100, new string[] { "평범한 의자" });
-        talkData.Add(200, new string[] { "대화 실패" });
+        //NPC1 = 1000, NPC2 = 2000
+        talkData.Add(1000, new string[] { "안녕?:0", "난 잭이야:1" });
+        talkData.Add(2000, new string[] { "넌 누구야:3" });
 
         //Quest Talk ((대화+퀘스트) 순서 + 누군지)
         talkData.Add(10 + 1000, new string[] 
-            {"어서와.:0",
-            "이 마을에는 전설이 있어:1",
-            "오른쪽 애가 알려줄거야:2"});
+            {"안녕. 난 잭이야:0",
+            "지금 어머니가 아프셔서 이 소를 마을에 팔고 와야 하는데 도와줄 수 있어?:1",
+            "고마워:0"});
         talkData.Add(11 + 2000, new string[]
-            {"여어.:0",
-            "전설을 듣고 싶으면 일을 하나 해줘:1",
-            "내 집 근처에서 떨어트린 동전을 주워줘:2"});
-
+            {"이보게. 소년:1",
+            "소를 팔러 가는 모양인데 나한테 팔지 않겠나?:2",
+            "나에게 소를 주면 이 마법의 콩을 주마:0"});
         talkData.Add(20 + 1000, new string[]
-            {"동전? 못 봤는데:1"});
-        talkData.Add(20 + 2000, new string[]
-            {"하이.:0",
-            "이 마을에는 전설이 있어:1",
-            "오른쪽 애가 알려줄거야:2"});
-        talkData.Add(20 + 5000, new string[]
-            {"근처에서 동전을 찾았다."});
-        talkData.Add(21 + 2000, new string[]
-            {"엇, 찾아줘서 고마워.:2"});
+            {"음... 고민되는데:0",
+            "너가 결정해줘:2"});
+
 
 
         //표정 이미지
