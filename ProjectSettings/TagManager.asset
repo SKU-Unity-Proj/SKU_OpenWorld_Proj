@@ -10,6 +10,7 @@ TagManager:
   - PullObject
   - Kitchen
   - Livingroom
+  - NPC
   layers:
   - Default
   - TransparentFX

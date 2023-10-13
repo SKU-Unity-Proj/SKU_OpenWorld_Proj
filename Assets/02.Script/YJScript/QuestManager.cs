@@ -25,14 +25,14 @@ public class QuestManager : MonoBehaviour
             case 10:
                 if(questActionIndex == 1)
                 {
-                    questObject[1].SetActive(false); //´À³¦Ç¥ ²¨Áü
-                    questObject[4].SetActive(false); //Å¬¸¯ ²¨Áü
-                    questObject[3].SetActive(true); //2000 ´À³¦Ç¥ »ý¼º
+                    //questObject[1].SetActive(false); //´À³¦Ç¥ ²¨Áü
+                    //questObject[4].SetActive(false); //Å¬¸¯ ²¨Áü
+                    //questObject[3].SetActive(true); //2000 ´À³¦Ç¥ »ý¼º
                 }
                 if (questActionIndex == 2)
                 {
-                    questObject[3].SetActive(false); //2000 ´À³¦Ç¥ ²¨Áü
-                    questObject[0].SetActive(false); //¼Ò ²¨Áü
+                    //questObject[3].SetActive(false); //2000 ´À³¦Ç¥ ²¨Áü
+                    //questObject[0].SetActive(false); //¼Ò ²¨Áü
                     //GameObject.Find("GameManager").GetComponent<UIManager>().Action();
                 }
                 break;
@@ -45,7 +45,7 @@ public class QuestManager : MonoBehaviour
         questList.Add(10, new QuestData("¸¶À»¿¡ ¼Ò ÆÈ±â"
                                         , new int[] { 1000, 2000 }));
 
-        questList.Add(20, new QuestData("µ¿Àü Ã£¾ÆÁÖ±â"
+        questList.Add(20, new QuestData("Äá ½É±â"
                                         , new int[] { 5000, 2000 }));
 
         questList.Add(30, new QuestData("Äù½ºÆ® Å¬¸®¾î"

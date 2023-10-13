@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class CheckInteration : MonoBehaviour
 {
     [SerializeField]
-    private float range;  // 아이템 습득이 가능한 최대 거리
+    private float range;
 
-    private bool pickupActivated = false;  // 아이템 습득 가능할시 True 
+    private bool interationActivated = false;
 
-    private RaycastHit hitInfo;  // 충돌체 정보 저장
-
-    [SerializeField]
-    private LayerMask layerMask;  // 특정 레이어를 가진 오브젝트에 대해서만 습득할 수 있어야 한다.
+    private RaycastHit hitInfo;
 
     [SerializeField]
-    private Text actionText;  // 행동을 보여 줄 텍스트
+    private LayerMask layerMask;
+
+    [SerializeField]
+    private Text portalText;
+    [SerializeField]
+    private Text beanText;
 
     public GameObject portal;
+    public GameObject beanStalk;
+    public CinemachineVirtualCamera mainCam;
+    public CinemachineVirtualCamera beanCam;
 
     void Update()
     {
@@ -47,26 +53,41 @@ public class CheckInteration : MonoBehaviour
 
     private void UIAppear()
     {
-        pickupActivated = true;
-        actionText.gameObject.SetActive(true);
-        actionText.text = " 포탈 열기 " + "<color=yellow>" + "(E)" + "</color>";
+        interationActivated = true;
+        portalText.gameObject.SetActive(true);
+        portalText.text = " 포탈 열기 " + "<color=yellow>" + "(E)" + "</color>";
+        beanText.gameObject.SetActive(true);
+        beanText.text = " 콩 심기 " + "<color=yellow>" + "(E)" + "</color>";
     }
 
     private void UIDisappear()
     {
-        pickupActivated = false;
-        actionText.gameObject.SetActive(false);
+        interationActivated = false;
+        portalText.gameObject.SetActive(false);
+        beanText.gameObject.SetActive(false);
     }
 
     private void CanInteration()
     {
-        if (pickupActivated)
+        if (interationActivated)
         {
             if (hitInfo.transform != null)
-            {
                 UIDisappear();
-            }
-            portal.SetActive(true);
+
+            if (hitInfo.transform.name == "JackPoster")
+                portal.SetActive(true);
+
+            if (hitInfo.transform.name == "BeanSpot")
+                StartCoroutine("GrowBean");
         }
+    }
+
+    IEnumerator GrowBean()
+    {
+        beanStalk.SetActive(true);
+        beanCam.MoveToTopOfPrioritySubqueue();
+        yield return new WaitForSeconds(6f);
+        mainCam.MoveToTopOfPrioritySubqueue();
+        yield break;
     }
 }
