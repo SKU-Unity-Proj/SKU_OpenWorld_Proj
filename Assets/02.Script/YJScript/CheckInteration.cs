@@ -85,9 +85,14 @@ public class CheckInteration : MonoBehaviour
     IEnumerator GrowBean()
     {
         beanStalk.SetActive(true);
+        //beanCam.SetActive(true);
         beanCam.MoveToTopOfPrioritySubqueue();
+        beanCam.Priority = 11;
+        mainCam.Priority = 10;
         yield return new WaitForSeconds(6f);
         mainCam.MoveToTopOfPrioritySubqueue();
+        beanCam.Priority = 10;
+        mainCam.Priority = 11;
         yield break;
     }
 }
