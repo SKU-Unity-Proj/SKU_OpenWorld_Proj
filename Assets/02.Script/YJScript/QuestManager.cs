@@ -7,7 +7,7 @@ public class QuestManager : MonoBehaviour
     public int questId;
     public int questActionIndex = 0; //Äù½ºÆ® ´ëÈ­ ¼ø¼­
     public GameObject[] questObject;
-    //public UIManager uiManager;
+    public GameObject cow;
 
     Dictionary<int, QuestData> questList;
 
@@ -28,12 +28,20 @@ public class QuestManager : MonoBehaviour
                     //questObject[1].SetActive(false); //´À³¦Ç¥ ²¨Áü
                     //questObject[4].SetActive(false); //Å¬¸¯ ²¨Áü
                     //questObject[3].SetActive(true); //2000 ´À³¦Ç¥ »ý¼º
+                    cow.gameObject.GetComponent<FollowCow>().enabled = true;
                 }
                 if (questActionIndex == 2)
                 {
                     //questObject[3].SetActive(false); //2000 ´À³¦Ç¥ ²¨Áü
                     //questObject[0].SetActive(false); //¼Ò ²¨Áü
                     //GameObject.Find("GameManager").GetComponent<UIManager>().Action();
+                    cow.SetActive(false);
+                }
+                break;
+            case 20:
+                if (questActionIndex == 0)
+                {
+                    
                 }
                 break;
         }

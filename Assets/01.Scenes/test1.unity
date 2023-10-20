@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18074441, g: 0.22626516, b: 0.3071657, a: 1}
+  m_IndirectSpecularColor: {r: 0.18074459, g: 0.22626568, b: 0.30716613, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 3
     agentTypeID: 0
-    agentRadius: 0.5
-    agentHeight: 2
+    agentRadius: 1
+    agentHeight: 4
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 3
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.33333334
     manualTileSize: 0
     tileSize: 256
     buildHeightMesh: 0
@@ -540,7 +540,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &109859398
 Transform:
@@ -3044,12 +3044,6 @@ MonoBehaviour:
   playerCamera: {fileID: 330585546}
   turnSmoothing: 0.06
   sprintFOV: 100
---- !u!4 &593200091 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 09b395d8cf1a82646b87c4f21a36454d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1489679006}
-  m_PrefabAsset: {fileID: 0}
 --- !u!136 &593200092
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3098,7 +3092,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &609429173
 GameObject:
@@ -3782,13 +3776,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886700133}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcf52dc07c460694c84051fc57cc16d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1549275568}
-  dampSpeed: 2
 --- !u!54 &886700139
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3816,7 +3809,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!136 &886700140
+--- !u!195 &886700145
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886700133}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 200
+  m_StoppingDistance: 3
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &886700146
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3835,10 +3850,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
-  m_Height: 2.4
+  m_Radius: 0.7058368
+  m_Height: 2
   m_Direction: 2
-  m_Center: {x: 0, y: 0.7, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &905656555
 GameObject:
   m_ObjectHideFlags: 0
@@ -4344,6 +4359,7 @@ MonoBehaviour:
   - {fileID: 1380976052}
   - {fileID: 609429173}
   - {fileID: 851830175}
+  cow: {fileID: 886700133}
 --- !u!4 &993930822
 Transform:
   m_ObjectHideFlags: 0
@@ -6058,7 +6074,13 @@ PrefabInstance:
       propertyPath: m_LightProbeUsage
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 95051569790832444, guid: 9ec060093457ad84ca2733cb15c2c41e,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 95051569790832444, guid: 9ec060093457ad84ca2733cb15c2c41e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -6073,7 +6095,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1287295899898638, guid: 9ec060093457ad84ca2733cb15c2c41e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 886700140}
+      addedObject: {fileID: 886700145}
+    - targetCorrespondingSourceObject: {fileID: 1287295899898638, guid: 9ec060093457ad84ca2733cb15c2c41e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 886700146}
   m_SourcePrefab: {fileID: 100100000, guid: 9ec060093457ad84ca2733cb15c2c41e, type: 3}
 --- !u!1 &1330580344
 GameObject:
@@ -6563,11 +6589,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeviCh_Texture
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 09b395d8cf1a82646b87c4f21a36454d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 09b395d8cf1a82646b87c4f21a36454d,
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1ac2a1891f6a2814dbcb83cbd24d5ee1, type: 2}
+      objectReference: {fileID: 9100000, guid: adba230638f2e81468f7ffe95eb3c900, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 09b395d8cf1a82646b87c4f21a36454d,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8505,7 +8541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95c37349b9174747994e7f4d1d42b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 593200091}
+  player: {fileID: 1549275568}
   pivotOffset: {x: 0, y: 1, z: 0}
   camOffset: {x: 0, y: 0, z: 5}
   followSpeed: 3
@@ -8630,7 +8666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251219e0b4b527242afa95b7d638fbf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 593200091}
+  player: {fileID: 1549275568}
   pivotOffset: {x: 0, y: 1, z: 0}
   camOffset: {x: 0.4, y: 0.5, z: -4}
   smooth: 10
@@ -10632,7 +10668,7 @@ PrefabInstance:
     - target: {fileID: 8262247415182964248, guid: 207e6fde9494f6f47a8b22c6ff465db2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8399008744269330220, guid: 207e6fde9494f6f47a8b22c6ff465db2,
         type: 3}
