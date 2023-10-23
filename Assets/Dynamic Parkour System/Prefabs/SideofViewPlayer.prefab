@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5556358534646836579}
   pivotOffset: {x: 0, y: 1, z: 0}
-  camOffset: {x: 0.4, y: 0.5, z: 2}
+  camOffset: {x: 0.4, y: 0.5, z: 7.21}
   followSpeed: 3
   smoothTime: 0.3
   smooth: 10
