@@ -45,8 +45,10 @@ namespace Climbing
                     jumpController.curPoint = null;
             }
 
+            
             jumpController.CheckJump();
             jumpController.FreeJump();
+
             return !jumpController.hasArrived();
         }
 

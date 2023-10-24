@@ -30,12 +30,19 @@ namespace Climbing
         public event OnLandedDelegate OnLanded;
         public event OnFallDelegate OnFall;
 
+        private bool isCrouching = false;
+        private float originalHeight;
+        private float crouchHeight = 1f;
+        private float crouchSpeed = 1.5f;
+
+        private Animator animator; // Animator 변수 추가
+
         [Header("Movement Settings")]
         public float walkSpeed;  // 걷는 속도
         public float JogSpeed;  // 조깅 속도
         public float RunSpeed;  // 달리기 속도
         public float fallForce;  // 낙하 시 적용되는 힘
-
+ 
         [Header("Feet IK")]  // 발 IK 관련 설정
         public bool enableFeetIK = true;  // 발 IK 활성화 여부
 
@@ -60,6 +67,9 @@ namespace Climbing
             rb = GetComponent<Rigidbody>();
             anim = controller.characterAnimation.animator;
             SetCurrentState(MovementState.Walking);
+
+            originalHeight = GetComponent<CapsuleCollider>().height;
+            animator = GetComponent<Animator>(); // Animator 컴포넌트 초기화
         }
 
         void Update()
@@ -78,6 +88,8 @@ namespace Climbing
                     Landed();
                 }
             }
+
+            CrouchInput();
 
         }
 
@@ -121,7 +133,40 @@ namespace Climbing
 
         #region Movement
 
+        private void CrouchInput()
+        {
+            Debug.Log("Crouch Input: " + controller.characterInput.crouch); // 입력 상태를 로그로 출력
 
+            if (controller.characterInput.crouch && !isCrouching)
+            {
+                StartCrouch();
+            }
+            else if (controller.characterInput.crouch && isCrouching)
+            {
+                StopCrouch();
+            }
+        }
+
+        private void StartCrouch()
+        {
+            isCrouching = true;
+            GetComponent<CapsuleCollider>().height = crouchHeight;
+            walkSpeed = crouchSpeed;
+            animator.SetBool("Crouch", true); // 애니메이터의 Crouch 파라미터를 true로 설정
+        }
+
+        private void StopCrouch()
+        {
+            isCrouching = false;
+            GetComponent<CapsuleCollider>().height = originalHeight;
+            walkSpeed = 3.0f; // 원래의 움직임 속도로 재설정
+            animator.SetBool("Crouch", false); // 애니메이터의 Crouch 파라미터를 false로 설정
+        }
+
+        public bool IsCrouching()
+        {
+            return isCrouching;
+        }
 
         public void ApplyInputMovement()
         {
@@ -171,6 +216,7 @@ namespace Climbing
             }
         }
 
+        
         /// <summary>
         /// 플레이어가 의도치 않게 떨어지지 않도록 합니다.
         /// </summary>

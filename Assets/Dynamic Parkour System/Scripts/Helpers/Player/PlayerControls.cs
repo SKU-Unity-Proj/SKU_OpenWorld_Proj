@@ -101,6 +101,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""128607b4-065e-40ec-8b33-869d1cf7dee7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -278,6 +287,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -374,6 +384,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Drop;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Crouch;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -382,6 +393,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -403,6 +415,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -419,6 +434,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
             }
         }
     }
@@ -451,5 +469,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
 }

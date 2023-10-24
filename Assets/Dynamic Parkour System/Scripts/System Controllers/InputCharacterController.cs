@@ -32,6 +32,7 @@ namespace Climbing
         [HideInInspector] public bool run;
         [HideInInspector] public bool jump;
         [HideInInspector] public bool drop;
+        [HideInInspector] public bool crouch;
 
         private void OnEnable()
         {
@@ -57,6 +58,8 @@ namespace Climbing
             controls.Player.Drop.canceled += ctx => drop = ctx.ReadValueAsButton();
             controls.Player.Run.performed += ctx => run = ctx.ReadValueAsButton();
             controls.Player.Run.canceled += ctx => run = ctx.ReadValueAsButton();
+            controls.Player.Crouch.performed += ctx => crouch = ctx.ReadValueAsButton();
+            controls.Player.Crouch.canceled += ctx => crouch = ctx.ReadValueAsButton();
         }
 
         void ToggleRun()

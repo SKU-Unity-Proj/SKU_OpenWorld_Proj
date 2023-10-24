@@ -223,6 +223,7 @@ namespace Climbing
             }
         }
 
+
         public void FreeJump()
         {
             if (!controller.isJumping && controller.characterInput.jump)
@@ -286,8 +287,6 @@ namespace Climbing
                 }
             }
         }
-
-
 
 
         /// <summary>

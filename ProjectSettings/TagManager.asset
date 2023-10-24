@@ -11,6 +11,8 @@ TagManager:
   - Kitchen
   - Livingroom
   - NPC
+  - Deep Jump
+  - Reach
   layers:
   - Default
   - TransparentFX
@@ -33,7 +35,7 @@ TagManager:
   - Interation
   - 
   - NPC
-  - 
+  - Box
   - 
   - 
   - 
