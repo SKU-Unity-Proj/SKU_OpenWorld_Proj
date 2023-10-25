@@ -33,6 +33,9 @@ namespace Climbing
         [SerializeField] private float maxHeight = 1.5f;
         [SerializeField] private float maxDistance = 5.0f;
 
+
+        Rigidbody rb;
+        public float jumpForce = 5f;
         private ThirdPersonController controller;
         private float turnSmoothVelocity;
         private Vector3 origin;
@@ -49,6 +52,7 @@ namespace Climbing
         private void Start()
         {
             controller = GetComponent<ThirdPersonController>();
+            rb = GetComponent<Rigidbody>();
         }
    
         void OnDrawGizmos()
@@ -228,7 +232,8 @@ namespace Climbing
         {
             if (!controller.isJumping && controller.characterInput.jump)
             {
-                Vector3 end;
+                // 수직 힘만 적용하고 수평 속도는 그대로 유지합니다.
+                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
 
                 // 카메라의 방향을 가져옵니다.
                 Transform camTransform = Camera.main.transform;
@@ -248,44 +253,18 @@ namespace Climbing
                 Debug.Log("Input Direction: " + inputDir);
 
                 // 플레이어의 방향을 입력 방향으로 설정합니다.
-                Quaternion targetRotation = Quaternion.LookRotation(inputDir);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1f); // 1f는 즉시 회전하도록 설정한 값입니다.
+                //Quaternion targetRotation = Quaternion.LookRotation(inputDir);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1f); // 1f는 즉시 회전하도록 설정한 값입니다.
 
-                Vector3 potentialEnd = transform.position + inputDir * 4;
-
-                RaycastHit hit;
-                if (controller.characterDetection.ThrowRayOnDirection(transform.position, inputDir, 4, out hit))
-                {
-                    Vector3 temp = hit.point;
-                    temp.y = transform.position.y;
-                    Vector3 dist = temp - transform.position;
-
-                    if (dist.sqrMagnitude >= 2)
-                    {
-                        end = hit.point + hit.normal * (controller.slidingCapsuleCollider.radius * 2);
-                    }
-                    else
-                    {
-                        end = Vector3.zero;
-                    }
-                }
-                else
-                {
-                    end = potentialEnd;
-                }
-
+                Vector3 end = transform.position + inputDir * 4;
                 // 가능한 경우에만 점프합니다.
-                if (end != Vector3.zero)
-                {
-                    if (SetParabola(transform.position, end))
-                    {
-                        controller.characterAnimation.JumpPrediction(false);
-                        controller.characterMovement.stopMotion = true;
-                        controller.DisableController();
-                        controller.isJumping = true;
-                    }
-                }
+                controller.characterAnimation.JumpPrediction(false);
+                controller.characterMovement.stopMotion = true;
+                //controller.DisableController();
+                controller.isJumping = true;
+
             }
+            controller.characterMovement.stopMotion = false;
         }
 
 
