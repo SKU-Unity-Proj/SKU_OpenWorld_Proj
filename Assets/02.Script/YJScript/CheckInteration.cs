@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class CheckInteration : MonoBehaviour
 {
@@ -25,6 +26,14 @@ public class CheckInteration : MonoBehaviour
     public GameObject beanStalk;
     public CinemachineVirtualCamera mainCam;
     public CinemachineVirtualCamera beanCam;
+
+    public Animator anim;
+
+    void Start()
+    {
+        anim = GameObject.Find("Player").GetComponent<Animator>();
+        //fade = GameObject.Find("Fade_Canvas").GetComponent<FadeInOut>();
+    }
 
     void Update()
     {
@@ -84,15 +93,23 @@ public class CheckInteration : MonoBehaviour
 
     IEnumerator GrowBean()
     {
+        //플레이어 이동시키기
         beanStalk.SetActive(true);
-        //beanCam.SetActive(true);
         beanCam.MoveToTopOfPrioritySubqueue();
         beanCam.Priority = 11;
         mainCam.Priority = 10;
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(8f);
+        anim.SetTrigger("Climbing");
+
+        //페이드인
+
         mainCam.MoveToTopOfPrioritySubqueue();
         beanCam.Priority = 10;
         mainCam.Priority = 11;
+
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene("Intro");
+
         yield break;
     }
 }

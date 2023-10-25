@@ -13,6 +13,11 @@ TagManager:
   - NPC
   - Deep Jump
   - Reach
+  - Pole
+  - Vault
+  - Character
+  - Slide
+  - GM
   layers:
   - Default
   - TransparentFX
