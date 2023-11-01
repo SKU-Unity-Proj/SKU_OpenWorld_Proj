@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
     public GameObject menuPanel;
-    private bool isPause;
+    //public GameObject player;
+    //public GameObject questManager;
+    private bool isPause = false;
+
+    void Start()
+    {
+
+    }
 
     void Update()
     {
@@ -13,36 +21,61 @@ public class Menu : MonoBehaviour
         {
             if (isPause == false)
             {
+                isPause = true;
                 menuPanel.SetActive(true);
                 Time.timeScale = 0f;
             }
 
-            else
+            else if (isPause == true)
             {
+                isPause = false;
                 menuPanel.SetActive(false);
                 Time.timeScale = 1f;
             }
         }
     }
 
-    public void ResumeBtn()
+    public void ResumeButton()
     {
         menuPanel.SetActive(false);
         Time.timeScale = 1f;
     }
 
-    public void SaveBtn()
+    public void SaveButton()
     {
+        /*
+        PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
+        PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
+        PlayerPrefs.SetFloat("PlayerZ", player.transform.position.z);
+        PlayerPrefs.SetFloat("QuestId", questManager.questId);
+        PlayerPrefs.SetFloat("QuestActionIndex", questManager.questIActionIndex);
+        PlayerPrefs.Save();
 
+        menuPanel.SetActive(false);
+        
     }
 
-    public void MenuBtn()
+    public void LoadButton()
     {
+        
+        float x = PlayerPrefs.GetFloat("PlayerX");
+        float y = PlayerPrefs.GetFloat("PlayerY");
+        int questId = PlayerPrefs.GetInt("QuestId");
+        int questActionIndex = PlayerPrefs.GetInt("QuestActionIndex");
 
+        player.transform.poistion = new Vector3(x, y, z);
+        questManager.questId = questId;
+        questManager.questActionIndex = questActionIndex;
+        */
     }
 
-    public void QuitBtn()
+    public void MenuButton()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 }
