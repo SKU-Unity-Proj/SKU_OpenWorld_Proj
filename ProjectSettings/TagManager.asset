@@ -4,20 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PlayerEyes
-  - FrontViewTrigger
-  - Item
-  - PullObject
-  - Kitchen
-  - Livingroom
-  - NPC
-  - Deep Jump
-  - Reach
-  - Pole
-  - Vault
-  - Character
-  - Slide
-  - GM
+  - LedgeLimit
+  - Ladder
+  - Enemy
+  - Metal
+  - Stone
+  - Wood
+  - Sand
   layers:
   - Default
   - TransparentFX
@@ -25,22 +18,22 @@ TagManager:
   - 
   - Water
   - UI
-  - Item
-  - Player
-  - Reflection_Probes
-  - Lighting
-  - Props
-  - ReflectedInWater
-  - Ground
-  - AccessibleVolume
-  - PostProcessing
   - 
-  - MainGround
   - 
-  - Interation
   - 
-  - NPC
-  - Box
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Character
+  - Climb
+  - Short Climb
+  - Vault
+  - Wall Run
+  - 
+  - 
   - 
   - 
   - 
