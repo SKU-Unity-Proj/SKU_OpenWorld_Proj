@@ -85,6 +85,7 @@ public class EnemyAI : MonoBehaviour
     public void OnFullyDetected(GameObject target)
     {
         FeedbackDisplay.text = "Charge! " + target.gameObject.name;
+        gameObject.GetComponent<Patrol>().enabled = false;
     }
 
     public void OnLostDetect(GameObject target)

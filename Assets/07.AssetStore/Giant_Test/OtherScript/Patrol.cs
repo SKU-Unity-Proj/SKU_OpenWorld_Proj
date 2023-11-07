@@ -7,18 +7,27 @@ public class Patrol : MonoBehaviour
 {
     private UnityEngine.AI.NavMeshAgent agent;
     private Animator anim;
+    IEnumerator enumerator;
 
     void Start()
     {
         StartCoroutine("Patroling");
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         anim = this.GetComponent<Animator>();
+
+        enumerator = Patroling();
     }
 
 
     void Update()
     {
-        
+
+    }
+    void OnDisable()
+    {
+        //스크립트 꺼지면 코루틴 끄려한거 -무시
+        StopCoroutine(enumerator);
+        Debug.Log("dd");
     }
 
     #region 거인 배회
