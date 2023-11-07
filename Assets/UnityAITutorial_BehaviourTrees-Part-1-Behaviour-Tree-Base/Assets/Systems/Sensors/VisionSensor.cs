@@ -17,7 +17,7 @@ public class VisionSensor : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {/*
+    {
         // check all candidates
         for (int index = 0; index < DetectableTargetManager.Instance.AllTargets.Count; ++index)
         {
@@ -47,6 +47,6 @@ public class VisionSensor : MonoBehaviour
                 if (hitResult.collider.GetComponentInParent<DetectableTarget>() == candidateTarget)
                     LinkedAI.ReportCanSee(candidateTarget);
             }
-        }*/
+        }
     }
 }

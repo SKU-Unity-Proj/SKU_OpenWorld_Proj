@@ -11,6 +11,13 @@ TagManager:
   - Stone
   - Wood
   - Sand
+  - Livingroom
+  - Kitchen
+  - GM
+  - NPC
+  - Item
+  - PullObject
+  - Character
   layers:
   - Default
   - TransparentFX
@@ -20,7 +27,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 

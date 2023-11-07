@@ -15,7 +15,7 @@ public class ProximitySensor : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {/*
+    {
         for (int index = 0; index < DetectableTargetManager.Instance.AllTargets.Count; ++index)
         {
             var candidateTarget = DetectableTargetManager.Instance.AllTargets[index];
@@ -26,6 +26,6 @@ public class ProximitySensor : MonoBehaviour
 
             if (Vector3.Distance(LinkedAI.EyeLocation, candidateTarget.transform.position) <= LinkedAI.ProximityDetectionRange)
                 LinkedAI.ReportInProximity(candidateTarget);
-        }*/
+        }
     }
 }
