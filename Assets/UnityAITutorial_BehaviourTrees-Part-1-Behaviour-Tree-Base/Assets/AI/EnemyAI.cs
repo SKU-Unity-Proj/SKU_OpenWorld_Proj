@@ -79,18 +79,18 @@ public class EnemyAI : MonoBehaviour
 
     public void OnDetected(GameObject target)
     {
-        FeedbackDisplay.text = "I see you " + target.gameObject.name;
+        FeedbackDisplay.text = "I see you ";
     }
 
     public void OnFullyDetected(GameObject target)
     {
-        FeedbackDisplay.text = "Charge! " + target.gameObject.name;
+        FeedbackDisplay.text = "Charge! ";
         gameObject.GetComponent<Patrol>().enabled = false;
     }
 
     public void OnLostDetect(GameObject target)
     {
-        FeedbackDisplay.text = "Where are you " + target.gameObject.name;
+        FeedbackDisplay.text = "Where are you ";
     }
 
     public void OnLostSuspicion()
