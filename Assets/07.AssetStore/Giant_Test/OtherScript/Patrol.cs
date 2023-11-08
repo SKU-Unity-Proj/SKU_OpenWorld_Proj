@@ -7,6 +7,7 @@ public class Patrol : MonoBehaviour
 {
     private UnityEngine.AI.NavMeshAgent agent;
     private Animator anim;
+    private bool outWhile;
     IEnumerator enumerator;
 
     void Start()
@@ -27,7 +28,7 @@ public class Patrol : MonoBehaviour
     {
         //스크립트 꺼지면 코루틴 끄려한거 -무시
         StopCoroutine(enumerator);
-        Debug.Log("dd");
+        outWhile = true;
     }
 
     #region 거인 배회
@@ -51,6 +52,10 @@ public class Patrol : MonoBehaviour
 
         while (true)
         {
+            if (outWhile == true)
+            {
+                break;
+            }
             currentTime += Time.deltaTime;
 
             //목표 위치에 근접하거나 오랜시간 배회하기 상태에 머물러 있으면
