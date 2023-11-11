@@ -7109,7 +7109,7 @@ PrefabInstance:
     - target: {fileID: -4044877673565821422, guid: a982740b83287cb49bfb223009ef34ab, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 814dd61f6216e97408eb186a5a71e3f4, type: 2}
+      objectReference: {fileID: 2100000, guid: faca4afe85da8374395f529b9ad99620, type: 2}
     - target: {fileID: 919132149155446097, guid: a982740b83287cb49bfb223009ef34ab, type: 3}
       propertyPath: m_Name
       value: 4
@@ -13872,7 +13872,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 814dd61f6216e97408eb186a5a71e3f4, type: 2}
+  - {fileID: 2100000, guid: 9a9fb8f88933b5d46883c9c1879d1b9a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24510,7 +24510,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e09c0c0835188d64ebd9354e8da5b019, type: 2}
+  - {fileID: 2100000, guid: faca4afe85da8374395f529b9ad99620, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -39898,7 +39898,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2dede55fd52f541468a7f12c1ea6029d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e09c0c0835188d64ebd9354e8da5b019, type: 2}
+      objectReference: {fileID: 2100000, guid: 00f5f87c6238e0b468694221630e131d, type: 2}
     - target: {fileID: 919132149155446097, guid: 2dede55fd52f541468a7f12c1ea6029d, type: 3}
       propertyPath: m_Name
       value: goose_wall
@@ -39971,7 +39971,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2dede55fd52f541468a7f12c1ea6029d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 814dd61f6216e97408eb186a5a71e3f4, type: 2}
+      objectReference: {fileID: 2100000, guid: 9a9fb8f88933b5d46883c9c1879d1b9a, type: 2}
     - target: {fileID: 919132149155446097, guid: 2dede55fd52f541468a7f12c1ea6029d, type: 3}
       propertyPath: m_Name
       value: goose_wall2
