@@ -18,6 +18,7 @@ TagManager:
   - Item
   - PullObject
   - Character
+  - Water
   layers:
   - Default
   - TransparentFX
