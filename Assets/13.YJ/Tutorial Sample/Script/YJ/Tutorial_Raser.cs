@@ -14,9 +14,9 @@ public class Tutorial_Raser : MonoBehaviour
     {
         if (col.gameObject.name == ("CS Character Controller"))
         {
-            //col.transform.position = StartPos.position;
+            col.transform.position = StartPos.position;
             //col.transform.Translate(new Vector3(0, 0, 0), Space.World);
-            col.transform.position = new Vector3(-224f, 0f, 0.5f);
+            //col.transform.position = new Vector3(-224f, 0f, 0.5f);
             Debug.Log("Player");
         }
     }
