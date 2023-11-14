@@ -19,6 +19,8 @@ TagManager:
   - PullObject
   - Character
   - Water
+  - Enemy02
+  - TutorialCrawl
   layers:
   - Default
   - TransparentFX
