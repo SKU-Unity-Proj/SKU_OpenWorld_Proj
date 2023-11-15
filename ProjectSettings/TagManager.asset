@@ -21,6 +21,7 @@ TagManager:
   - Water
   - Enemy02
   - TutorialCrawl
+  - BlockBox
   layers:
   - Default
   - TransparentFX
