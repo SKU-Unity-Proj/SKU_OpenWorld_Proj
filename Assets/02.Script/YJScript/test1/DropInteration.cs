@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PullingObj : MonoBehaviour
+public class DropInteration : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody playerRigidbody;
