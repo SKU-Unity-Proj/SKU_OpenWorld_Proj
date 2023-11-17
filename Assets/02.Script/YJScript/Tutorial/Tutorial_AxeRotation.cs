@@ -32,11 +32,8 @@ public class Tutorial_AxeRotation : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.name == ("CS Character Controller"))
-        {
             col.transform.position = StartPos.position;
             Debug.Log("Player");
-        }
     }
 
 }

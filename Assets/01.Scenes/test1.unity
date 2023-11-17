@@ -10646,7 +10646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShakeDuration: 0.1
-  ShakeAmplitude: 1.2
+  ShakeAmplitude: 3
   ShakeFrequency: 2
   VirtualCamera: {fileID: 2076718917}
   layerMask:
