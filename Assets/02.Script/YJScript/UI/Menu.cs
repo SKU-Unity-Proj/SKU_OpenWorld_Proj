@@ -37,6 +37,7 @@ public class Menu : MonoBehaviour
 
     public void ResumeButton()
     {
+        isPause = false;
         menuPanel.SetActive(false);
         Time.timeScale = 1f;
     }
