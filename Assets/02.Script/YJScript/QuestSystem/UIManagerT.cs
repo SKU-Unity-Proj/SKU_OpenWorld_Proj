@@ -23,10 +23,6 @@ public class UIManagerT : MonoBehaviour
     private void Update()
     {
         CheckNPC();
-
-        if (isAction == true)
-            if (Input.GetKeyDown(KeyCode.Space))
-                Action();
     }
 
     public void Action()
@@ -74,7 +70,7 @@ public class UIManagerT : MonoBehaviour
 
     private void CheckNPC()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, radius, layerMask);
 

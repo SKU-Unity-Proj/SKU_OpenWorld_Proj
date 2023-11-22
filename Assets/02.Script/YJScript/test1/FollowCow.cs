@@ -14,7 +14,7 @@ public class FollowCow : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Player").transform;
+        target = GameObject.Find("CS Character Controller").transform;
     }
 
     void FixedUpdate()

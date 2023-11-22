@@ -25,23 +25,23 @@ public class QuestManager : MonoBehaviour
             case 10:
                 if(questActionIndex == 1)
                 {
-                    //questObject[1].SetActive(false); //´À³¦Ç¥ ²¨Áü
-                    //questObject[4].SetActive(false); //Å¬¸¯ ²¨Áü
-                    //questObject[3].SetActive(true); //2000 ´À³¦Ç¥ »ý¼º
+                    questObject[0].SetActive(false); //1000 ´À³¦Ç¥ ²¨Áü
+                    questObject[1].SetActive(true); //2000 »ý¼º
                     cow.gameObject.GetComponent<FollowCow>().enabled = true;
                 }
                 if (questActionIndex == 2)
                 {
-                    //questObject[3].SetActive(false); //2000 ´À³¦Ç¥ ²¨Áü
-                    //questObject[0].SetActive(false); //¼Ò ²¨Áü
+                    questObject[1].SetActive(false); //2000 ²¨Áü
                     //GameObject.Find("GameManager").GetComponent<UIManager>().Action();
-                    cow.SetActive(false);
+                    cow.SetActive(false); //¼Ò ²¨Áü
+                    questObject[0].SetActive(true); //1000 ´À³¦Ç¥ ÄÑÁü
                 }
                 break;
             case 20:
                 if (questActionIndex == 0)
                 {
-                    
+                    questObject[2].SetActive(true); //Crouch rock ÄÑÁü
+                    questObject[0].SetActive(false); //1000 ´À³¦Ç¥ ²¨Áü
                 }
                 break;
         }
@@ -53,8 +53,8 @@ public class QuestManager : MonoBehaviour
         questList.Add(10, new QuestData("¸¶À»¿¡ ¼Ò ÆÈ±â"
                                         , new int[] { 1000, 2000 }));
 
-        questList.Add(20, new QuestData("Äá ½É±â"
-                                        , new int[] { 5000, 2000 }));
+        questList.Add(20, new QuestData("Àè ¾ö¸¶¿Í ´ëÈ­ÇÏ±â"
+                                        , new int[] { 2000, 3000 }));
 
         questList.Add(30, new QuestData("Äù½ºÆ® Å¬¸®¾î"
                                         , new int[] { 0 }));

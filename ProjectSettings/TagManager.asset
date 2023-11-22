@@ -23,6 +23,8 @@ TagManager:
   - TutorialCrawl
   - BlockBox
   - Giant
+  - Deep Jump
+  - Reach
   layers:
   - Default
   - TransparentFX
@@ -34,7 +36,7 @@ TagManager:
   - 
   - Player
   - Giant
-  - 
+  - NPC
   - 
   - 
   - 

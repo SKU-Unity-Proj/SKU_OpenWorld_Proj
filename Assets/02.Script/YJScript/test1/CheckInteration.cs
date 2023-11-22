@@ -31,7 +31,7 @@ public class CheckInteration : MonoBehaviour
 
     void Start()
     {
-        anim = GameObject.Find("Player").GetComponent<Animator>();
+        anim = GameObject.Find("CS Character Controller").GetComponent<Animator>();
         //fade = GameObject.Find("Fade_Canvas").GetComponent<FadeInOut>();
     }
 
