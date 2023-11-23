@@ -26,5 +26,6 @@ public class GrowBeanstalk : MonoBehaviour
     void DestroyDust()
     {
         dust.SetActive(false);
+        Debug.Log("dust off");
     }
 }
