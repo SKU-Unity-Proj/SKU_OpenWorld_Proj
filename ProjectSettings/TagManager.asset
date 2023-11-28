@@ -26,6 +26,7 @@ TagManager:
   - Deep Jump
   - Reach
   - CutScene
+  - Wall
   layers:
   - Default
   - TransparentFX
