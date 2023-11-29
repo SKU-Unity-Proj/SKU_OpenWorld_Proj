@@ -859,6 +859,10 @@ PrefabInstance:
       value: Beanstalk (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7599772397289699722, guid: 259f511ac2c974e42ab2e73e8404a65c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599772397289699722, guid: 259f511ac2c974e42ab2e73e8404a65c, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
