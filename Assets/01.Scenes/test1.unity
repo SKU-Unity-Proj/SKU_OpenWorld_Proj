@@ -2084,6 +2084,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100060, guid: 8807b9fa6350d26408b4faa0bb818db9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1411978164}
+    - targetCorrespondingSourceObject: {fileID: 100060, guid: 8807b9fa6350d26408b4faa0bb818db9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1411978166}
+    - targetCorrespondingSourceObject: {fileID: 100060, guid: 8807b9fa6350d26408b4faa0bb818db9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1411978165}
   m_SourcePrefab: {fileID: 100100000, guid: 8807b9fa6350d26408b4faa0bb818db9, type: 3}
 --- !u!4 &195566798 stripped
 Transform:
@@ -4439,6 +4445,7 @@ MonoBehaviour:
   maxSize: 222
   growRate: 30
   scale: 0
+  dust: {fileID: 0}
 --- !u!4 &574460130 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 949283463680566139, guid: 259f511ac2c974e42ab2e73e8404a65c, type: 3}
@@ -9533,6 +9540,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1411978165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411978143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec5b4a28dc75224a881b71e250a7098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FeedbackDisplay: {fileID: 0}
+  _VisionConeAngle: 60
+  _VisionConeRange: 30
+  _VisionConeColour: {r: 1, g: 0, b: 0, a: 0.25}
+  _HearingRange: 20
+  _HearingRangeColour: {r: 1, g: 1, b: 0, a: 0.25}
+  _ProximityDetectionRange: 3
+  _ProximityRangeColour: {r: 1, g: 1, b: 1, a: 0.25}
+--- !u!114 &1411978166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411978143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf8f22982774b84b8d51697be5997e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VisionSensitivity:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  VisionMinimumAwareness: 1
+  VisionAwarenessBuildRate: 10
+  HearingMinimumAwareness: 0
+  HearingAwarenessBuildRate: 0.5
+  ProximityMinimumAwareness: 0
+  ProximityAwarenessBuildRate: 1
+  AwarenessDecayDelay: 0.1
+  AwarenessDecayRate: 0.1
 --- !u!1 &1414572849
 GameObject:
   m_ObjectHideFlags: 0
