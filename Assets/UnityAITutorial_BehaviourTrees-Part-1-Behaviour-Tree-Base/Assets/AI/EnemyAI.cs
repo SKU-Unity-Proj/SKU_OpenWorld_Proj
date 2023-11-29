@@ -11,7 +11,7 @@ using UnityEditor;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI FeedbackDisplay;
-    
+
     [SerializeField] float _VisionConeAngle = 60f;
     [SerializeField] float _VisionConeRange = 30f;
     [SerializeField] Color _VisionConeColour = new Color(1f, 0f, 0f, 0.25f);
@@ -48,13 +48,13 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ReportCanSee(DetectableTarget seen)
@@ -79,18 +79,17 @@ public class EnemyAI : MonoBehaviour
 
     public void OnDetected(GameObject target)
     {
-        FeedbackDisplay.text = "I see you ";
+        FeedbackDisplay.text = "I see you " + target.gameObject.name;
     }
 
     public void OnFullyDetected(GameObject target)
     {
-        FeedbackDisplay.text = "Charge! ";
-        gameObject.GetComponent<Patrol>().enabled = false;
+        FeedbackDisplay.text = "Charge! " + target.gameObject.name;
     }
 
     public void OnLostDetect(GameObject target)
     {
-        FeedbackDisplay.text = "Where are you ";
+        FeedbackDisplay.text = "Where are you " + target.gameObject.name;
     }
 
     public void OnLostSuspicion()
@@ -126,7 +125,7 @@ public class EnemyAIEditor : Editor
 
         // draw the vision cone
         Handles.color = ai.VisionConeColour;
-        Handles.DrawSolidArc(ai.transform.position, Vector3.up, startPoint, ai.VisionConeAngle * 2f, ai.VisionConeRange);        
+        Handles.DrawSolidArc(ai.transform.position, Vector3.up, startPoint, ai.VisionConeAngle * 2f, ai.VisionConeRange);
     }
 }
 #endif // UNITY_EDITOR

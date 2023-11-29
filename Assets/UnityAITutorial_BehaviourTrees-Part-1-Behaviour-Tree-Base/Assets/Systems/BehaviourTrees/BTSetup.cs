@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(BehaviourTree))]
 public class BTSetup : MonoBehaviour
 {
+
+
     [Header("Wander Settings")]
     [SerializeField] float Wander_Range = 10f;
 
@@ -18,9 +20,11 @@ public class BTSetup : MonoBehaviour
     protected BehaviourTree LinkedBT;
     protected CharacterAgent Agent;
     protected AwarenessSystem Sensors;
+    protected Animator anim;
 
     void Awake()
     {
+        anim = GetComponent<Animator>();
         Agent = GetComponent<CharacterAgent>();
         LinkedBT = GetComponent<BehaviourTree>();
         Sensors = GetComponent<AwarenessSystem>();
@@ -67,13 +71,14 @@ public class BTSetup : MonoBehaviour
         chaseRoot.Add<BTNode_Action>("Chase Target",
             () =>
             {
-                Agent.MoveTo(Chase_CurrentTarget.transform.position);
+
+                Agent.MoveToRun(Chase_CurrentTarget.transform.position);
 
                 return BehaviourTree.ENodeStatus.InProgress;
             },
             () =>
             {
-                Agent.MoveTo(Chase_CurrentTarget.transform.position);
+                Agent.MoveToRun(Chase_CurrentTarget.transform.position);
 
                 return BehaviourTree.ENodeStatus.InProgress;
             });
@@ -84,6 +89,7 @@ public class BTSetup : MonoBehaviour
             {
                 Vector3 location = Agent.PickLocationInRange(Wander_Range);
 
+                anim.SetBool("Run", false);
                 Agent.MoveTo(location);
 
                 return BehaviourTree.ENodeStatus.InProgress;
@@ -92,5 +98,6 @@ public class BTSetup : MonoBehaviour
             {
                 return Agent.AtDestination ? BehaviourTree.ENodeStatus.Succeeded : BehaviourTree.ENodeStatus.InProgress;
             });
+
     }
 }

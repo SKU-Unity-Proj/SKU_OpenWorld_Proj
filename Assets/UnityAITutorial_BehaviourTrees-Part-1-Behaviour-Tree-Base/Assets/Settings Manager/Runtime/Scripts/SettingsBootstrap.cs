@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-/*
+
 static public class SettingsBootstrap
 {
     const string SceneName = "SettingsBootstrap";
@@ -23,4 +23,3 @@ static public class SettingsBootstrap
         SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
     }
 }
-*/

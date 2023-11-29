@@ -15,9 +15,15 @@ public class CharacterAgent : CharacterBase
     [SerializeField] float NearestPointSearchRange = 5f;
 
     NavMeshAgent Agent;
+    Animator anim;
+
+    private float walkSpeed = 1.5f;
+    private float runSpeed = 0.5f;
+
     bool DestinationSet = false;
     bool ReachedDestination = false;
     EOffmeshLinkStatus OffMeshLinkStatus = EOffmeshLinkStatus.NotStarted;
+
 
     public bool IsMoving => Agent.velocity.magnitude > float.Epsilon;
 
@@ -27,6 +33,7 @@ public class CharacterAgent : CharacterBase
     protected void Start()
     {
         Agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -73,7 +80,7 @@ public class CharacterAgent : CharacterBase
         // return control the agent
         Agent.updatePosition = true;
         Agent.updateRotation = true;
-        Agent.updateUpAxis = true;    
+        Agent.updateUpAxis = true;
     }
 
     public Vector3 PickLocationInRange(float range)
@@ -102,6 +109,18 @@ public class CharacterAgent : CharacterBase
     public virtual void MoveTo(Vector3 destination)
     {
         CancelCurrentCommand();
+
+        this.Agent.speed = walkSpeed;
+        anim.SetBool("Move", true);
+
+        SetDestination(destination);
+    }
+    public virtual void MoveToRun(Vector3 destination)
+    {
+        CancelCurrentCommand();
+
+        this.Agent.speed = runSpeed;
+        anim.SetBool("Run", true);
 
         SetDestination(destination);
     }
