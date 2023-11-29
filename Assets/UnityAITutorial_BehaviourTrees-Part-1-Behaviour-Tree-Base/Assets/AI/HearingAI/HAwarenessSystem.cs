@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackedTarget
+public class HTrackedTarget
 {
     public DetectableTarget Detectable;
     public Vector3 RawPosition;
@@ -18,11 +18,11 @@ public class TrackedTarget
         var oldAwareness = Awareness;
 
         if (target != null)
-            Detectable      = target;
-        RawPosition     = position;
-        LastSensedTime  = Time.time;
-        Awareness       = Mathf.Clamp(Mathf.Max(Awareness, minAwareness) + awareness, 0f, 2f);
-        
+            Detectable = target;
+        RawPosition = position;
+        LastSensedTime = Time.time;
+        Awareness = Mathf.Clamp(Mathf.Max(Awareness, minAwareness) + awareness, 0f, 2f);
+
         if (oldAwareness < 2f && Awareness >= 2f)
             return true;
         if (oldAwareness < 1f && Awareness >= 1f)
@@ -51,8 +51,8 @@ public class TrackedTarget
     }
 }
 
-[RequireComponent(typeof(EnemyAI))]
-public class AwarenessSystem : MonoBehaviour
+[RequireComponent(typeof(HearingEnemyAI))]
+public class HAwarenessSystem : MonoBehaviour
 {
     [SerializeField] AnimationCurve VisionSensitivity;
     [SerializeField] float VisionMinimumAwareness = 1f;
@@ -67,22 +67,22 @@ public class AwarenessSystem : MonoBehaviour
     [SerializeField] float AwarenessDecayDelay = 0.1f;
     [SerializeField] float AwarenessDecayRate = 0.1f;
 
-    Dictionary<GameObject, TrackedTarget> Targets = new Dictionary<GameObject, TrackedTarget>();
-    EnemyAI LinkedAI;
+    Dictionary<GameObject, HTrackedTarget> Targets = new Dictionary<GameObject, HTrackedTarget>();
+    HearingEnemyAI LinkedAI;
 
-    public Dictionary<GameObject, TrackedTarget> ActiveTargets => Targets;
+    public Dictionary<GameObject, HTrackedTarget> ActiveTargets => Targets;
 
     // Start is called before the first frame update
     void Start()
     {
-        LinkedAI = GetComponent<EnemyAI>();
+        LinkedAI = GetComponent<HearingEnemyAI>();
     }
 
     // Update is called once per frame
     void Update()
     {
         List<GameObject> toCleanup = new List<GameObject>();
-        foreach(var targetGO in Targets.Keys)
+        foreach (var targetGO in Targets.Keys)
         {
             if (Targets[targetGO].DecayAwareness(AwarenessDecayDelay, AwarenessDecayRate * Time.deltaTime))
             {
@@ -102,7 +102,7 @@ public class AwarenessSystem : MonoBehaviour
         }
 
         // cleanup targets that are no longer detected
-        foreach(var target in toCleanup)
+        foreach (var target in toCleanup)
             Targets.Remove(target);
     }
 
@@ -110,7 +110,7 @@ public class AwarenessSystem : MonoBehaviour
     {
         // not in targets
         if (!Targets.ContainsKey(targetGO))
-            Targets[targetGO] = new TrackedTarget();
+            Targets[targetGO] = new HTrackedTarget();
 
         // update target awareness
         if (Targets[targetGO].UpdateAwareness(target, position, awareness, minAwareness))
@@ -124,30 +124,18 @@ public class AwarenessSystem : MonoBehaviour
         }
     }
 
-    public void ReportCanSee(DetectableTarget seen)
-    {
-        // determine where the target is in the field of view
-        var vectorToTarget = (seen.transform.position - LinkedAI.EyeLocation).normalized;
-        var dotProduct = Vector3.Dot(vectorToTarget, LinkedAI.EyeDirection);
 
-        // determine the awareness contribution
-        var awareness = VisionSensitivity.Evaluate(dotProduct) * VisionAwarenessBuildRate * Time.deltaTime;
-
-        UpdateAwareness(seen.gameObject, seen, seen.transform.position, awareness, VisionMinimumAwareness);
-    }
-
-    /*
     public void ReportCanHear(GameObject source, Vector3 location, EHeardSoundCategory category, float intensity)
     {
         var awareness = intensity * HearingAwarenessBuildRate * Time.deltaTime;
 
         UpdateAwareness(source, null, location, awareness, HearingMinimumAwareness);
     }
-    */
+
     public void ReportInProximity(DetectableTarget target)
     {
         var awareness = ProximityAwarenessBuildRate * Time.deltaTime;
 
         UpdateAwareness(target.gameObject, target, target.transform.position, awareness, ProximityMinimumAwareness);
-    }    
+    }
 }

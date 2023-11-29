@@ -7,8 +7,8 @@ using TMPro;
 using UnityEditor;
 #endif // UNITY_EDITOR
 
-[RequireComponent(typeof(AwarenessSystem))]
-public class EnemyAI : MonoBehaviour
+[RequireComponent(typeof(HAwarenessSystem))]
+public class HearingEnemyAI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI FeedbackDisplay;
 
@@ -37,12 +37,12 @@ public class EnemyAI : MonoBehaviour
 
     public float CosVisionConeAngle { get; private set; } = 0f;
 
-    AwarenessSystem Awareness;
+    HAwarenessSystem Awareness;
 
     void Awake()
     {
         CosVisionConeAngle = Mathf.Cos(VisionConeAngle * Mathf.Deg2Rad);
-        Awareness = GetComponent<AwarenessSystem>();
+        Awareness = GetComponent<HAwarenessSystem>();
     }
 
     // Start is called before the first frame update
@@ -57,17 +57,12 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    public void ReportCanSee(DetectableTarget seen)
-    {
-        Awareness.ReportCanSee(seen);
-    }
 
-    /*
     public void ReportCanHear(GameObject source, Vector3 location, EHeardSoundCategory category, float intensity)
     {
         Awareness.ReportCanHear(source, location, category, intensity);
     }
-    */
+
     public void ReportInProximity(DetectableTarget target)
     {
         Awareness.ReportInProximity(target);
@@ -105,12 +100,12 @@ public class EnemyAI : MonoBehaviour
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(EnemyAI))]
-public class EnemyAIEditor : Editor
+[CustomEditor(typeof(HearingEnemyAI))]
+public class HearingEnemyAIEditor : Editor
 {
     public void OnSceneGUI()
     {
-        var ai = target as EnemyAI;
+        var ai = target as HearingEnemyAI;
 
         // draw the detectopm range
         Handles.color = ai.ProximityDetectionColour;
@@ -120,13 +115,6 @@ public class EnemyAIEditor : Editor
         Handles.color = ai.HearingRangeColour;
         Handles.DrawSolidDisc(ai.transform.position, Vector3.up, ai.HearingRange);
 
-        // work out the start point of the vision cone
-        Vector3 startPoint = Mathf.Cos(-ai.VisionConeAngle * Mathf.Deg2Rad) * ai.transform.forward +
-                             Mathf.Sin(-ai.VisionConeAngle * Mathf.Deg2Rad) * ai.transform.right;
-
-        // draw the vision cone
-        Handles.color = ai.VisionConeColour;
-        Handles.DrawSolidArc(ai.transform.position, Vector3.up, startPoint, ai.VisionConeAngle * 2f, ai.VisionConeRange);
     }
 }
 #endif // UNITY_EDITOR
