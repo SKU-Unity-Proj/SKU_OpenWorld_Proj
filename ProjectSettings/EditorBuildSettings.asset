@@ -12,4 +12,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/TPS Scene.unity
     guid: be30c1826347f844bbc6c6356d32e2a9
+  - enabled: 1
+    path: Assets/01.Scenes/CameraTest.unity
+    guid: 502536b6583a73b49876cb3dc8b8157b
   m_configObjects: {}
