@@ -42,6 +42,9 @@ public class QuestManager : MonoBehaviour
                 {
                     questObject[2].SetActive(true); //Crouch rock ÄÑÁü
                     questObject[0].SetActive(false); //1000 ´À³¦Ç¥ ²¨Áü
+                    questObject[3].SetActive(true); //CTrigger ÄÑÁü
+                    questObject[4].SetActive(true);
+                    questObject[5].SetActive(true);
                 }
                 break;
         }
