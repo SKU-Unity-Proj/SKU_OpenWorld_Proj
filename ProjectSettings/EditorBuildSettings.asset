@@ -15,4 +15,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/CameraTest.unity
     guid: 502536b6583a73b49876cb3dc8b8157b
+  - enabled: 1
+    path: Assets/01.Scenes/Intro.unity
+    guid: a70db533e8f1f524da79d6b51c9e1f84
+  - enabled: 1
+    path: Assets/01.Scenes/JackHouse.unity
+    guid: 383aeff0143f15b48a904c9837dacc3e
   m_configObjects: {}

@@ -16,8 +16,15 @@ public class KeyboardGuide : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         //indexText = indexText + 1;
+        if (this.gameObject.name == "F_Trigger")
+        {
+            textMesh.text = "<color=red>F</color> 대화 및 상호작용";
+            StartCoroutine(FadeFullAlpha());
 
-        if (this.gameObject.name == "X_Trigger")
+            Invoke("FTrigger", 4.1f);
+        }
+
+        else if (this.gameObject.name == "X_Trigger")
         {
             textMesh.text = "<color=red>X</color> 구르기";
             StartCoroutine(FadeFullAlpha());
@@ -39,14 +46,6 @@ public class KeyboardGuide : MonoBehaviour
             StartCoroutine(FadeFullAlpha());
 
             Invoke("ZTrigger", 4.1f);
-        }
-
-        else if (this.gameObject.name == "F_Trigger")
-        {
-            textMesh.text = "<color=red>F</color> 상호작용";
-            StartCoroutine(FadeFullAlpha());
-
-            Invoke("FTrigger", 4.1f);
         }
         
     }

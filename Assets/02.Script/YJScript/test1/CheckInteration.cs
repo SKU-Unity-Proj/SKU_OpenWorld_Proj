@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class CheckInteration : MonoBehaviour
 {
@@ -27,12 +29,11 @@ public class CheckInteration : MonoBehaviour
     public CinemachineVirtualCamera mainCam;
     public CinemachineVirtualCamera beanCam;
 
-    public Animator anim;
+    private PlayableDirector playableDirector;
 
     void Start()
     {
-        anim = GameObject.Find("CS Character Controller").GetComponent<Animator>();
-        //fade = GameObject.Find("Fade_Canvas").GetComponent<FadeInOut>();
+        playableDirector = GetComponent<PlayableDirector>();
     }
 
     void Update()
@@ -98,16 +99,12 @@ public class CheckInteration : MonoBehaviour
         beanCam.MoveToTopOfPrioritySubqueue();
         beanCam.Priority = 11;
         mainCam.Priority = 10;
-        yield return new WaitForSeconds(8f);
-        anim.SetTrigger("Climbing");
+        yield return new WaitForSeconds(9f);
 
-        //페이드인
+        //타임라인 실행
+        playableDirector.Play();
 
-        mainCam.MoveToTopOfPrioritySubqueue();
-        beanCam.Priority = 10;
-        mainCam.Priority = 11;
-
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(9f);
         SceneManager.LoadScene("Intro");
 
         yield break;

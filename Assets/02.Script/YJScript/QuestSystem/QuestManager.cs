@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class QuestManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class QuestManager : MonoBehaviour
     public GameObject cow;
 
     Dictionary<int, QuestData> questList;
+
+    public CinemachineVirtualCamera bridgeCam;
+    public CinemachineVirtualCamera mainCam;
 
     void Awake()
     {
@@ -22,29 +26,31 @@ public class QuestManager : MonoBehaviour
     {
         switch (questId)
         {
+            //questObject[] = 0(¾ö¸¶ ´À³¦Ç¥) 1(»óÀÎ) 2(¹«³ÊÁø µ¹) 3(CTrigger) 4(ZTrigger) 5(FTrigger) 6(»óÀÎ ´À³¦Ç¥)
             case 10:
-                if(questActionIndex == 1)
+                if(questActionIndex == 1) //¾ö¸¶¿Í ´ëÈ­ ÀÌÈÄ
                 {
+                    StartCoroutine("ShowBridge");
                     questObject[0].SetActive(false); //1000 ´À³¦Ç¥ ²¨Áü
-                    questObject[1].SetActive(true); //2000 »ý¼º
+                    questObject[6].SetActive(true); //2000 ´À³¦Ç¥ ÄÑÁü
                     cow.gameObject.GetComponent<FollowCow>().enabled = true;
                 }
-                if (questActionIndex == 2)
+                if (questActionIndex == 2) //º¸ºÎ»ó°ú ´ëÈ­ ÀÌÈÄ
                 {
                     questObject[1].SetActive(false); //2000 ²¨Áü
-                    //GameObject.Find("GameManager").GetComponent<UIManager>().Action();
                     cow.SetActive(false); //¼Ò ²¨Áü
                     questObject[0].SetActive(true); //1000 ´À³¦Ç¥ ÄÑÁü
+                    questObject[6].SetActive(false); //2000 ´À³¦Ç¥ ²¨Áü
                 }
                 break;
+
             case 20:
                 if (questActionIndex == 0)
                 {
                     questObject[2].SetActive(true); //Crouch rock ÄÑÁü
                     questObject[0].SetActive(false); //1000 ´À³¦Ç¥ ²¨Áü
                     questObject[3].SetActive(true); //CTrigger ÄÑÁü
-                    questObject[4].SetActive(true);
-                    questObject[5].SetActive(true);
+                    questObject[4].SetActive(true); //ZTrigger ÄÑÁü
                 }
                 break;
         }
@@ -89,5 +95,16 @@ public class QuestManager : MonoBehaviour
         questActionIndex = 0;
     }
 
-    
+    IEnumerator ShowBridge()
+    {
+        bridgeCam.MoveToTopOfPrioritySubqueue();
+        bridgeCam.Priority = 11;
+
+        yield return new WaitForSeconds(3f);
+
+        mainCam.MoveToTopOfPrioritySubqueue();
+        bridgeCam.Priority = 2;
+
+        yield break;
+    }
 }

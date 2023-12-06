@@ -27,6 +27,8 @@ public class TalkManager : MonoBehaviour
             {"잭, 어디에 있다가 이제 오는거니.:0",
             "당장 내일 먹을 음식이 없으니 마을에 가서 이 소를 팔고 오렴.:1",
             "늦지 않게 와야 해.:0"});
+        talkData.Add(10 + 2000, new string[]
+            {"팔만한 물건이 있으면 바꿔주마:0"});
         talkData.Add(11 + 2000, new string[]
             {"이보게. 소년:1",
             "소를 팔러 가는 모양인데 나한테 팔지 않겠나?:2",
