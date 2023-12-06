@@ -28,29 +28,37 @@ public class QuestManager : MonoBehaviour
         {
             //questObject[] = 0(¾ö¸¶ ´À³¦Ç¥) 1(»óÀÎ) 2(¹«³ÊÁø µ¹) 3(CTrigger) 4(ZTrigger) 5(FTrigger) 6(»óÀÎ ´À³¦Ç¥)
             case 10:
-                if(questActionIndex == 1) //¾ö¸¶¿Í ´ëÈ­ ÀÌÈÄ
+                if(questActionIndex == 1) //¾ö¸¶¿¡°Ô ½ÉºÎ¸§ ¹ÞÀº ÀÌÈÄ
                 {
-                    StartCoroutine("ShowBridge");
                     questObject[0].SetActive(false); //1000 ´À³¦Ç¥ ²¨Áü
                     questObject[6].SetActive(true); //2000 ´À³¦Ç¥ ÄÑÁü
                     cow.gameObject.GetComponent<FollowCow>().enabled = true;
                 }
                 if (questActionIndex == 2) //º¸ºÎ»ó°ú ´ëÈ­ ÀÌÈÄ
                 {
-                    questObject[1].SetActive(false); //2000 ²¨Áü
                     cow.SetActive(false); //¼Ò ²¨Áü
-                    questObject[0].SetActive(true); //1000 ´À³¦Ç¥ ÄÑÁü
-                    questObject[6].SetActive(false); //2000 ´À³¦Ç¥ ²¨Áü
                 }
                 break;
 
             case 20:
-                if (questActionIndex == 0)
+                if (questActionIndex == 1) //Äá ¹ÞÀº ÀÌÈÄ
                 {
-                    questObject[2].SetActive(true); //Crouch rock ÄÑÁü
+                    questObject[6].SetActive(false); //2000 ´À³¦Ç¥ ²¨Áü
+                    questObject[0].SetActive(true); //1000 ´À³¦Ç¥ ÄÑÁü
+                    questObject[7].SetActive(true); //ÄáÁÖ¸Ó´Ï ÄÑÁü
+                }
+                break;
+
+            case 30:
+                if (questActionIndex == 1) //Äá ¹ÞÀº ÈÄ ¾ö¸¶¿Í ´ëÈ­ ÀÌÈÄ
+                {
+                    questObject[1].SetActive(false); //»óÀÎ ²¨Áü
                     questObject[0].SetActive(false); //1000 ´À³¦Ç¥ ²¨Áü
+                    StartCoroutine("ShowBridge");
+                    questObject[2].SetActive(true); //Crouch rock ÄÑÁü
                     questObject[3].SetActive(true); //CTrigger ÄÑÁü
                     questObject[4].SetActive(true); //ZTrigger ÄÑÁü
+                    questObject[0].SetActive(false); //1000 ´À³¦Ç¥ ²¨Áü
                 }
                 break;
         }
@@ -62,10 +70,13 @@ public class QuestManager : MonoBehaviour
         questList.Add(10, new QuestData("¸¶À»¿¡ ¼Ò ÆÈ±â"
                                         , new int[] { 1000, 2000 }));
 
-        questList.Add(20, new QuestData("Àè ¾ö¸¶¿Í ´ëÈ­ÇÏ±â"
-                                        , new int[] { 2000, 3000 }));
+        questList.Add(20, new QuestData("Äá ¹Þ±â"
+                                        , new int[] { 2000 }));
 
-        questList.Add(30, new QuestData("Äù½ºÆ® Å¬¸®¾î"
+        questList.Add(30, new QuestData("¾ö¸¶¶û ´ëÈ­ÇÏ±â"
+                                        , new int[] { 1000 }));
+
+        questList.Add(40, new QuestData("Å¬¸®¾î"
                                         , new int[] { 0 }));
     }
 
